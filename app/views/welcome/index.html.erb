@@ -1,0 +1,27 @@
+<h1>All Products</h1>
+<%= link_to "View cart(#{session[:cart].count})", bucket_path %>
+
+<% flash.each do |type, msg| %>
+  <div> <%= msg %> </div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.name, product_path(product) %></td>
+        <td><%= product.description %></td>
+        <td><%= product.price %></td>
+        <td><%= button_to "Add to cart", add_to_cart_path(id: product.id) %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>

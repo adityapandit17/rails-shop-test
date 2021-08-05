@@ -1,0 +1,23 @@
+<h1>Cart Items</h1>
+<%= button_to "Place order", create_order_path %>    
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+      <th></th> 
+    </tr>
+  </thead>
+  <tbody>
+    <% session[:cart].each do |product_id, quantity| %>
+      <% product = Product.find(product_id) unless product_id.blank? %>
+      <tr>
+        <td><%= link_to product&.name %></td>
+        <td><%= quantity %></td>
+        <td><%= quantity * product&.price %></td>
+        <td><%= button_to "Remove from cart", remove_from_cart_path(id: product.id) %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
